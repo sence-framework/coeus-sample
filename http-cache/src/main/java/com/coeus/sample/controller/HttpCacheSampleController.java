@@ -34,6 +34,12 @@ import java.util.Date;
 @RequestMapping("/http")
 public class HttpCacheSampleController {
 
+    /**
+     * 缓存协商
+     * @param modifiedSence
+     * @param response
+     * @return
+     */
     @RequestMapping("/cache")
     public ResponseEntity cache(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSence, HttpServletResponse response) {
         //缓存1天
@@ -45,10 +51,17 @@ public class HttpCacheSampleController {
                 return new ResponseEntity("cached", HttpStatus.NOT_MODIFIED);
             }
         }
+        //告知浏览器最后一次更新时间
         response.setDateHeader("Last-Modified", nowTime);
         return new ResponseEntity("not cache", HttpStatus.OK);
     }
 
+    /**
+     * 消灭请求
+     * @param modifiedSence
+     * @param response
+     * @return
+     */
     @RequestMapping("/expires")
     public ResponseEntity expires(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSence, HttpServletResponse response) {
         //缓存1天
@@ -63,6 +76,7 @@ public class HttpCacheSampleController {
         }
         expireTime = nowTime + 24 * 3600 * 1000;
         response.setDateHeader("Last-Modified", nowTime);
+        //告知浏览器缓存时间点
         response.setDateHeader("Expires",expireTime);
         return new ResponseEntity("Expires 200", HttpStatus.OK);
     }
