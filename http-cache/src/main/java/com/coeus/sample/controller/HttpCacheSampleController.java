@@ -36,16 +36,16 @@ public class HttpCacheSampleController {
 
     /**
      * 缓存协商
-     * @param modifiedSence
+     * @param modifiedSince
      * @param response
      * @return
      */
     @RequestMapping("/cache")
-    public ResponseEntity cache(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSence, HttpServletResponse response) {
+    public ResponseEntity cache(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSince, HttpServletResponse response) {
         //缓存1天
         long nowTime = new Date().getTime();
-        if(modifiedSence!=null) {
-            long expireTime = modifiedSence.getTime() + 24 * 3600 * 1000;
+        if(modifiedSince!=null) {
+            long expireTime = modifiedSince.getTime() + 24 * 3600 * 1000;
             //未过期
             if (nowTime<expireTime) {
                 return new ResponseEntity("cached", HttpStatus.NOT_MODIFIED);
@@ -58,17 +58,17 @@ public class HttpCacheSampleController {
 
     /**
      * 消灭请求
-     * @param modifiedSence
+     * @param modifiedSince
      * @param response
      * @return
      */
     @RequestMapping("/expires")
-    public ResponseEntity expires(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSence, HttpServletResponse response) {
+    public ResponseEntity expires(@RequestHeader(value = "If-Modified-Since", required = false) Date modifiedSince, HttpServletResponse response) {
         //缓存1天
         long nowTime = new Date().getTime();
         long expireTime;
-        if(modifiedSence!=null) {
-            expireTime = modifiedSence.getTime() + 24 * 3600 * 1000;
+        if(modifiedSince!=null) {
+            expireTime = modifiedSince.getTime() + 24 * 3600 * 1000;
             //未过期
             if (nowTime<expireTime) {
                 return new ResponseEntity("Expires 304", HttpStatus.NOT_MODIFIED);
