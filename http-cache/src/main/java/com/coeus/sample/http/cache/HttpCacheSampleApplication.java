@@ -6,7 +6,7 @@
  * <p>
  * Copyright 2015 coeus
  */
-package com.coeus.sample;
+package com.coeus.sample.http.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

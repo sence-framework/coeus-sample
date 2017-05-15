@@ -6,7 +6,7 @@
  * <p>
  * Copyright 2015 coeus
  */
-package com.coeus.sample.controller;
+package com.coeus.sample.http.cache.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
